@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academia</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Registre-se e faça<br>parte da nossa família!</h1>
+
+        <label for="name">Nome completo:</label>
+        <input type="text" id="nome-completo" class="controle-registro" required><br>
+        <label for="birth-date">Data de Nascimento:</label>
+        <input type="text" id="data-de-nascimento" class="controle-registro" required pattern="[0-31]{2}/[0-12]{2}/[0-999]{4}" placeholder="00/00/0000"><br>
+        <label for="cpf">CPF:</label>
+        <input type="text" id="cpf" class="controle-registro" required><br>
+        <label for="endereco">Endereço:</label>
+        <input type="text" id="endereco" class="controle-registro" required><br>
+        <label for="email">Email:</label>
+        <input type="text" id="email" class="registro-controle" required><br>
+        <label for="telefone">Telefone:</label>
+        <input type="text" id="telefone" class="controle-registro" required><br>
+        <button class="button" type="submit">Registrar</button>
+    </div>
+</body>
+</html>
