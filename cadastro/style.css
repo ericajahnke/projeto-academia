@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+body * {
+  box-sizing: border-box;
+}
+
+.main-login {
+  width: 100vw;
+  height: 100vh;
+  background: #191919;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.left-login {
+  width: 50vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.left-login h1 {
+  color: #951e2c;
+  font-size: 3vw;
+}
+
+.left-login-image {
+  width: 35vw;
+}
+
+.right-login {
+  width: 50vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-login {
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 30px 35px;
+  background: #262626;
+  border-radius: 20px;
+  box-shadow: 0px 10px 20px #0c0c0c;
+}
+
+.card-login h1 {
+  color: #951e2c;
+  font-weight: 800;
+  margin: 0;
+}
+
+.textfield {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin: 10px 0px;
+}
+
+.textfield input {
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  padding: 15px;
+  background: #323232;
+  color: #f0ffffde;
+  font-size: 12pt;
+  box-shadow: 0px 10px 20px #0c0c0c;
+  outline: none;
+  box-sizing: border-box;
+  align-items: center;
+}
+
+.textfield label {
+  color: #f0ffffde;
+  margin-bottom: 10px;
+}
+
+.textfield input::placeholder {
+  color: #f0ffff94;
+}
+
+.card-login div {
+  width: 100%; 
+  display: flex;
+  justify-content: center; 
+  flex-direction: column; 
+}
+
+.btn-login {
+  width: 100%;
+  padding: 16px 0px;
+  margin: 25px auto;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: #120203;
+  background: #951e2c;
+  cursor: pointer;
+  box-shadow: 0px 10px 80px -12px #220000;
+  margin-bottom: 10px;
+}
+
+.faca-login {
+  margin-top: 10px;
+  font-size: 12px; 
+  color: #f0ffffde; 
+  text-align: center; 
+  margin-top: 0;
+}
+
+.faca-login a {
+  color: #951e2c; 
+  text-decoration: none; 
+}
+
+.faca-login a:hover {
+  text-decoration: underline;
+}
+
+@media only screen and (max-width: 950px) {
+  .card-login {
+    width: 85%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .main-login {
+    flex-direction: column;
+  }
+  .left-login h1 {
+    display: none;
+  }
+  .left-login {
+    width: 100%;
+    height: auto;
+  }
+  .right-login {
+    width: 100%;
+    height: auto;
+  }
+  .left-login-image {
+    width: 50vw;
+  }
+  .card-login {
+    width: 90%;
+  }
+}
