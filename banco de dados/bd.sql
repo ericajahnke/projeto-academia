@@ -23,7 +23,9 @@ insert into registro (matricula, nomecompleto, nascimento, telefone, email, senh
 ('2', 'Lucas Freitas', '2006-09-11', '53999102846', 'lucasf@gmail.com', 'luqueta321'),
 ('3', 'Lucas Pouey', '1995-05-13', '53991882736', 'poueylucas@gmail.com', 'aiaiopaigosta'),
 ('4', 'João Vitor Pereira', '2005-04-30', '51982736721', 'joaovpereira@gmail.com', 'joaoblunt'),
-('5', 'Rafael Barboza Balleste', '2002-11-10', '55991027434', 'barbozaball@gmail.com', 'malphiteap');
+('5', 'Rafael Barboza Balleste', '2002-11-10', '55991027434', 'barbozaball@gmail.com', 'malphiteap'),
+('6', 'Lucas Almeida', '2006-08-17', '53981173546', 'luscasalmeida@gmail.com', 'freefire'),
+('7', 'Bianca Marino', '1999-08-01', '55923450124', 'bibimar@gmail.com', 'boatardeneyma');
 
 select * from registro;
 
@@ -32,7 +34,9 @@ insert into acesso (matricula, email, senha) values
 ('2', 'lucasf@gmail.com', 'luqueta321'),
 ('3', 'poueylucas@gmail.com', 'aiaiopaigosta'),
 ('4', 'joaovpereira@gmail.com', 'joaoblunt'),
-('5', 'barbozaball@gmail.com', 'malphiteap');
+('5', 'barbozaball@gmail.com', 'malphiteap'),
+('6', 'luscasalmeida@gmail.com', 'freefire'),
+('7', 'bibimar@gmail.com', 'boatardeneyma');
 
 select * from acesso;
 
@@ -71,7 +75,9 @@ insert into aluno (matricula, nomecompleto, frequencia, totalresgates, totalpont
 ('2', 'Lucas Freitas', '+75%', '3', '533'),
 ('3', 'Lucas Pouey', '-75%', '1', '645'),
 ('4', 'João Vitor Pereira', '-75%', '4', '463'),
-('5', 'Rafael Barboza Balleste', '-75%', '5', '507');
+('5', 'Rafael Barboza Balleste', '-75%', '5', '507'),
+('6', 'Lucas Almeida', '+75%', '3', '414'),
+('7', 'Bianca Marino', '-75%', '2', '552');
 
 select * from aluno;
 
@@ -88,83 +94,44 @@ insert into produtos (idproduto, nome, estoque, pontos) values
 select * from produtos;
 
 insert into resgate (idresgate, idproduto, matricula, nomealuno, nomeproduto, pontosrestantes, dataresgate) values
-('1', '4', '1', 'Érica Jahnke Pires', 'Creatina 300g', '169', '2024-10-15'),
-('2', '3', '2', 'Lucas Freitas', 'Creatina 150g', '335', '2024-09-30'),
-('3', '5', '4', 'João Vitor Pereira', 'Creatina 500g', '163', '2024-10-03'), 
-('4', '1', '5', 'Rafael Barboza Balleste', 'Whey 900g', '247', '2024-10-20'),
-('5', '2', '3', 'Lucas Pouey', 'Whey 1kg', '345', '2024-09-13');
+('1', '4', '1', 'Érica Jahnke Pires', 'Creatina 300g', '404', '2024-10-15'),
+('2', '3', '2', 'Lucas Freitas', 'Creatina 150g', '533', '2024-09-30'),
+('3', '5', '4', 'João Vitor Pereira', 'Creatina 500g', '645', '2024-10-03'), 
+('4', '1', '5', 'Rafael Barboza Balleste', 'Whey 900g', '463', '2024-10-20'),
+('5', '2', '3', 'Lucas Pouey', 'Whey 1kg', '507', '2024-09-13'),
+('6', '7', '7', 'Bianca Marino', 'Munhequeira', '414', '2024-10-28'),
+('7', '8', '6', 'Lucas Almeida', 'Strap', '552', '2024-10-24');
 
 select * from resgate;
 
+-- Calcular pontos restantes do aluno.
+	select a.nomecompleto, a.totalpontos, p.nome as nomeproduto,
+	p.pontos, (a.totalpontos - p.pontos) as pontosrestantes
+	from aluno a
+	join resgate r on a.matricula = r.matricula
+	join produtos p on r.idproduto = p.idproduto; 
 
-/* Calcular pontos restantes do aluno.
-	select nomealuno, sum(pontosrestantes) as pontosrestantes
-	from resgate
-	where matricula = '1'
-	group by nomealuno;
-
-	select nomealuno, sum(pontosrestantes) as pontosrestantes
-	from resgate
-	where matricula = '2'
-	group by nomealuno;
-
-	select nomealuno, sum(pontosrestantes) as pontosrestantes
-	from resgate
-	where matricula = '3'
-	group by nomealuno;
-
-	select nomealuno, sum(pontosrestantes) as pontosrestantes
-	from resgate
-	where matricula = '4'
-	group by nomealuno;
-
-	select nomealuno, sum(pontosrestantes) as pontosrestantes
-	from resgate
-	where matricula = '5'
-	group by nomealuno; */
-
-
-/* Atualizar na tabela.
-	update aluno
-	set totalpontos = '169'
-	where nomecompleto = 'Érica Jahnke Pires';
-
-	update aluno
-	set totalpontos = '335'
-	where nomecompleto = 'Lucas Freitas';
-
-	update aluno
-	set totalpontos = '345'
-	where nomecompleto = 'Lucas Pouey';
-
-	update aluno
-	set totalpontos = '163'
-	where nomecompleto = 'João Vitor Pereira';
-
-	update aluno
-	set totalpontos = '247'
-	where nomecompleto = 'Rafael Barboza Balleste'; */
+-- Atualizar pontos restantes na tabela.
+	update aluno a
+	join resgate r on a.matricula = r.matricula
+	join produtos p on r.idproduto = p.idproduto
+	set a.totalpontos = a.totalpontos - p.pontos;
 
 
 -- Calculadora TMB.
 create table userinfo (
+iduserinfo int primary key auto_increment,
 matricula int,
 idade int not null,
-altura int not null,
-peso int not null,
+altura decimal(5, 2) not null,
+peso decimal(5, 2) not null,
 sexo enum('Feminino', 'Masculino') not null,
 atividadefisica enum('Ativa', 'Regular', 'Nula') not null,
 foreign key (matricula) references registro(matricula)
 );
 
-create table tmb (
-idtmb int primary key auto_increment,
-tmbativa decimal (10, 2) not null,
-tmbregular decimal (10, 2) not null,
-tmbnula decimal (10, 2) not null
-);
-
 create table macros (
+idmacros int primary key auto_increment,
 matricula int,
 proteina int not null,
 carboidrato int not null, 
@@ -175,10 +142,10 @@ foreign key (matricula) references registro(matricula)
 insert into userinfo (matricula, idade, altura, peso, sexo, atividadefisica) values 
 ('1', '18', '155', '53', 'Feminino', 'Regular'),
 ('2', '18', '175', '61', 'Masculino', 'Ativa'),
-('3', '19', '170', '55', 'Masculino', 'Nula'),
-('4', '22', '160', '58', 'Masculino', 'Nula'),
-('5', '29', '180', '70', 'Masculino', 'Regular');
+('3', '29', '170', '55', 'Masculino', 'Nula'),
+('4', '19', '160', '58', 'Masculino', 'Nula'),
+('5', '21', '180', '70', 'Masculino', 'Regular'),
+('6', '18', '170', '70', 'Masculino', 'Ativa'),
+('7', '25', '178', '58', 'Feminino', 'Regular');
 
-insert into tmb (idtmb, tmbativa, tmbregular, tmbnula) values 
-('1', '721.16', '540.87', '360.58'),
-('2', '974.56', '757.99', '600');
+select * from userinfo;
